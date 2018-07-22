@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>票票说</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="./css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/index.css"/>
+</head>
+<body>
+<header id="header" class="mui-bar mui-bar-nav">
+    <span class="mui-pull-left mui-icon mui-icon-back"></span>
+    <h1 class="mui-title">票票说</h1>
+</header>
+<div class="mui-content">
+    <h1 id="imgSrc" style="display: none"><%=imgSrc%></h1>
+    <div id='msg-list'>
+        <div class="one">
+        <div class="notice-bar">欢迎<span id="user-name"><%=username%></span>同学进入票票说</div>
+        </div>
+            <!--<div class="msg-item">-->
+            <!--<img class="msg-user-img" src="./images/person.jpg" alt=""/>-->
+            <!--<p class="user-name">张靖</p>-->
+            <!--<div class="msg-content">-->
+                <!--<div class="msg-content-inner">-->
+                    <!--121-->
+                <!--</div>-->
+                <!--<div class="msg-content-arrow"></div>-->
+            <!--</div>-->
+            <!--<div class="mui-item-clear"></div>-->
+        <!--</div>-->
+        <!--<div class="msg-item-self">-->
+            <!--<img class="msg-user" src="./images/person.jpg" alt=""/>-->
+            <!--<p class="user-name">张靖</p>-->
+            <!--<div class="msg-content">-->
+                <!--<div class="msg-content-inner">-->
+                    <!--1212121-->
+                <!--</div>-->
+                <!--<div class="msg-content-arrow"></div>-->
+            <!--</div>-->
+            <!--<div class="mui-item-clear"></div>-->
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-left">
+        <i id='msg-image' class="mui-icon mui-icon-camera" style="font-size: 28px;"></i>
+    </div>
+    <div class="footer-center">
+        <textarea id='msg-text' type="text" class='input-text'></textarea>
+        <button id='msg-sound' type="button" class='input-sound' style="display: none;">按住说话</button>
+    </div>
+    <label class="footer-right">
+        <i id='msg-send' class="mui-icon mui-icon-mic"></i>
+    </label>
+</footer>
+<div id='sound-alert' class="rprogress">
+</div>
+<script type="text/javascript" src="./js/socket.io.js" ></script>
+<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+<script>
+    // split url
+    // var url=decodeURI(location.href).split('?')[1].split('&');
+    console.log(location.href);
+    // get avatar
+    var userImgSrc=$("#imgSrc").text();
+    console.log(userImgSrc);
+    // socket part
+    var socket=io();
+    $("#msg-send").click(function (e) {
+        var contentVal=$("#msg-text").val();
+        socket.emit("chat",{
+            "content":contentVal,
+            "user":$("#user-name").text(),
+            "img":userImgSrc
+        });
+        $("#msg-text").val("");
+    });
+
+
+    socket.on("chat",function (msg) {
+        console.log(msg);
+        if(msg.user != $("#user-name").text()){
+            var html=`<div class="msg-item">
+            <img class="msg-user-img" src=${msg.img} alt=""/>
+            <p class="user-name">${msg.user}</p>
+            <div class="msg-content">
+                <div class="msg-content-inner">
+                     ${msg.content}
+                </div>
+                <div class="msg-content-arrow"></div>
+            </div>
+            <div class="mui-item-clear"></div>
+        </div>`
+        }else{
+            var html=`<div class="msg-item-self">
+            <img class="msg-user" src=${msg.img} alt=""/>
+            <p class="user-name">${msg.user}</p>
+            <div class="msg-content">
+                <div class="msg-content-inner">
+                    ${msg.content}
+                </div>
+                <div class="msg-content-arrow"></div>
+            </div>
+            <div class="mui-item-clear"></div>
+        </div>`
+        }
+
+        $("#msg-list").append(html);
+    })
+</script>
+</body>
+
+</html>

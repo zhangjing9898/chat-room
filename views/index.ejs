@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="css/login.css" />
+    <!--<style type="text/css">-->
+        <!--div{-->
+            <!--width: 100%;-->
+            <!--border: 1px solid #000;-->
+            <!--margin: 0 auto;-->
+        <!--}-->
+        <!--#username{-->
+            <!--font-size: 30px;-->
+        <!--}-->
+    <!--</style>-->
+</head>
+<body>
+<div class="login-box flex-box">
+    <!--登录标题栏-->
+    <h2 class="sign-title box-width">LOGIN</h2>
+    <!--头像栏-->
+    <div class="picture-carousel">
+        <div class="arrow left-arrow">
+            <div class="before-arrow"></div>
+        </div>
+        <img class="p1 img-setting" src="images/1.jpg" alt="1.jpg">
+        <img class="p2 img-setting" src="images/2.jpg" alt="2.jpg">
+        <img class="p3 img-setting" src="images/3.jpg" alt="3.jpg">
+        <img class="p2 img-setting" src="images/4.jpg" alt="4.jpg">
+        <img class="p1 img-setting" src="images/5.jpg" alt="5.jpg">
+        <div class="arrow right-arrow">
+            <div class="after-arrow"></div>
+        </div>
+    </div>
+    <!--用户名栏-->
+    <div class="name-box box-width">
+        <input type="text" class="user-name box-width" placeholder="请输入你的名字">
+    </div>
+    <!--确认栏-->
+    <div class="button-box box-width">
+        <input type="button" class="login-button box-width" value="进入票票说">
+    </div>
+    <!--&lt;!&ndash;错误信息栏&ndash;&gt;-->
+    <!--<form action="/check" method="get" class="name-box box-width">-->
+        <!--<div class="name-box">-->
+            <!--<input type="text" id="username" name="username" class="user-name box-width" placeholder="请输入用户名"/>-->
+        <!--</div>-->
+        <!--<div class="button-box">-->
+        <!--<input type="submit" class="login-button box-width" value="进入票票说" />-->
+        <!--</div>-->
+    <!--</form>-->
+    <div class="error-box box-width">
+        <span class="error-message">Welcome to chatroom!</span>
+    </div>
+</div>
+<script src="../js/login.js"></script>
+</body>
+</html>
